@@ -1,0 +1,76 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.20.2"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "8d3ef1a65c5a90546f1b1eb5525e163f",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "[JAVA_GATEWAY_EXITED] Java gateway process exited before sending its port number.",
+          "traceback": []
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "JAVA_HOME is not set\n",
+          "mimetype": "text/plain"
+        },
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">&quot;/tmp/marimo_17/__marimo__cell_Hbol_.py&quot;</span>, line <span class=\"m\">9</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"o\">.</span><span class=\"n\">getOrCreate</span><span class=\"p\">()</span>\n<span class=\"w\">     </span><span class=\"pm\">^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/usr/local/lib/python3.11/site-packages/pyspark/sql/session.py&quot;</span>, line <span class=\"m\">557</span>, in <span class=\"n\">getOrCreate</span>\n<span class=\"w\">    </span><span class=\"n\">sc</span> <span class=\"o\">=</span> <span class=\"n\">SparkContext</span><span class=\"o\">.</span><span class=\"n\">getOrCreate</span><span class=\"p\">(</span><span class=\"n\">sparkConf</span><span class=\"p\">)</span>\n<span class=\"w\">         </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/usr/local/lib/python3.11/site-packages/pyspark/core/context.py&quot;</span>, line <span class=\"m\">542</span>, in <span class=\"n\">getOrCreate</span>\n<span class=\"w\">    </span><span class=\"n\">SparkContext</span><span class=\"p\">(</span><span class=\"n\">conf</span><span class=\"o\">=</span><span class=\"n\">conf</span> <span class=\"ow\">or</span> <span class=\"n\">SparkConf</span><span class=\"p\">())</span>\n  File <span class=\"nb\">&quot;/usr/local/lib/python3.11/site-packages/pyspark/core/context.py&quot;</span>, line <span class=\"m\">206</span>, in <span class=\"n\">__init__</span>\n<span class=\"w\">    </span><span class=\"n\">SparkContext</span><span class=\"o\">.</span><span class=\"n\">_ensure_initialized</span><span class=\"p\">(</span><span class=\"bp\">self</span><span class=\"p\">,</span> <span class=\"n\">gateway</span><span class=\"o\">=</span><span class=\"n\">gateway</span><span class=\"p\">,</span> <span class=\"n\">conf</span><span class=\"o\">=</span><span class=\"n\">conf</span><span class=\"p\">)</span>\n  File <span class=\"nb\">&quot;/usr/local/lib/python3.11/site-packages/pyspark/core/context.py&quot;</span>, line <span class=\"m\">463</span>, in <span class=\"n\">_ensure_initialized</span>\n<span class=\"w\">    </span><span class=\"n\">SparkContext</span><span class=\"o\">.</span><span class=\"n\">_gateway</span> <span class=\"o\">=</span> <span class=\"n\">gateway</span> <span class=\"ow\">or</span> <span class=\"n\">launch_gateway</span><span class=\"p\">(</span><span class=\"n\">conf</span><span class=\"p\">)</span>\n<span class=\"w\">                                       </span><span class=\"pm\">^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/usr/local/lib/python3.11/site-packages/pyspark/java_gateway.py&quot;</span>, line <span class=\"m\">111</span>, in <span class=\"n\">launch_gateway</span>\n<span class=\"w\">    </span><span class=\"k\">raise</span> <span class=\"n\">PySparkRuntimeError</span><span class=\"p\">(</span>\n<span class=\"gr\">pyspark.errors.exceptions.base.PySparkRuntimeError</span>: <span class=\"n\">[JAVA_GATEWAY_EXITED] Java gateway process exited before sending its port number.</span>\n</pre></div>\n</span>",
+          "mimetype": "application/vnd.marimo+traceback"
+        }
+      ]
+    },
+    {
+      "id": "LZvH",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "jOFi",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RDqx",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "vDHO",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iayx",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "JJcx",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aWLX",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

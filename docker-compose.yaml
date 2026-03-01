@@ -1,0 +1,35 @@
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: agro_postgres
+    environment:
+      - POSTGRES_USER=agro
+      - POSTGRES_PASSWORD=agro
+      - POSTGRES_DB=agrodb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  minio:
+    image: minio/minio
+    container_name: agro_minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  marimo:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.marimo
+    container_name: agro_marimo
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./notebooks:/app/notebooks
+      - ./data:/app/data 
