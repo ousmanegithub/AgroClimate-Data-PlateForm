@@ -33,3 +33,30 @@ services:
     volumes:
       - ./notebooks:/app/notebooks
       - ./data:/app/data 
+
+
+    # --- ORCHESTRATION (AIRFLOW) ---
+  airflow:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile.airflow
+    container_name: agro_airflow
+    depends_on:
+      - postgres
+      - minio
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://agro:agro@postgres:5432/agrodb
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+      - _AIRFLOW_WWW_USER_USERNAME=admin
+      - _AIRFLOW_WWW_USER_PASSWORD=admin123
+      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+    volumes:
+      - ./dags:/opt/airflow/dags            # les fichiers de workflow
+      - ./scripts:/opt/airflow/scripts      # les scripts PySpark extraits des notebooks
+      - ./logs:/opt/airflow/logs            # les logs d'exécution d'Airflow
+      - ./data:/app/data
+    ports:
+      - "8081:8080"
+    command: standalone
