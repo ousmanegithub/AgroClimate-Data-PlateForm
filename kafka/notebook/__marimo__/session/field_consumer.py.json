@@ -1,0 +1,111 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.1",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "6a85a10eee8697d4b84359a38a9f016c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "84bf04bb71e8c66e3c1d54a5f9e93619",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-1-imports-consumer-source-2\">Cellule 1 - Imports consumer source 2</h2>\n<span class=\"paragraph\">Cette cellule charge les composants pour lire les topics terrain.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: verifier la qualite des donnees complementaires (field events) avant analyses unifiees.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "1f43e19269c2a8ee8fa1e6b715c85669",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "061fadc8a7c6c4211e51cd264bf5670f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-2-configuration\">Cellule 2 - Configuration</h2>\n<span class=\"paragraph\">Cette cellule definit les topics de la 2e source.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: distinguer le flux brut terrain du flux d'alertes terrain.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "4e9b6a40e779dbed46014a3683213756",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "1947ffbff01bef17defdd969a16212b9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-3-initialisation-consumer\">Cellule 3 - Initialisation consumer</h2>\n<span class=\"paragraph\">Cette cellule prepare la lecture des topics field.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: permettre un controle dedie a la source complementaire.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "94c60545fb02888596b0452ac4be0618",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "1ff537c868cdf8292a0976cdf47d844f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-4-fonction-de-lecture-field\">Cellule 4 - Fonction de lecture field</h2>\n<span class=\"paragraph\">Cette cellule standardise la lecture des messages de la 2e source.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: fiabiliser le diagnostic du flux terrain avant consolidation multi-sources.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "75876408927945f9335885c190e0d645",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "c9b6358762618374bf2a1884283e1e8c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-5-execution\">Cellule 5 - Execution</h2>\n<span class=\"paragraph\">Cette cellule lit les anomalies terrain pour verification operationnelle.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: controler rapidement les alertes de la 2e source avant analyse metier unifiee.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

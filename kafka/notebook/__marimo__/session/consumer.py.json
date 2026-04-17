@@ -1,0 +1,111 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.1",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "6a85a10eee8697d4b84359a38a9f016c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "9427a40deaee536692cdd976348d4514",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-1-imports-consumer-capteur\">Cellule 1 - Imports consumer capteur</h2>\n<span class=\"paragraph\">Cette cellule charge les composants pour lire des topics Kafka.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: rendre visibles les messages facilite le controle qualite du flux streaming.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "3e03ce25dff9416f324120146a93e844",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "d0353d2b4b3173be77815d3cc77c01e4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-2-configuration\">Cellule 2 - Configuration</h2>\n<span class=\"paragraph\">Cette cellule fixe la cible de lecture (brut ou anomalies).</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: pouvoir lire les deux topics permet controle operationnel complet.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "4e9b6a40e779dbed46014a3683213756",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "008ee1ba73be845d17c5f34d8f101974",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-3-initialisation-consumer\">Cellule 3 - Initialisation consumer</h2>\n<span class=\"paragraph\">Cette cellule cree un consumer generique reutilisable.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: eviter la duplication accelere les tests sur plusieurs topics.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "6429757baca0679d195964d3f761e490",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "fea6a9f27809792f0633094677ab3442",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-4-fonction-de-consommation\">Cellule 4 - Fonction de consommation</h2>\n<span class=\"paragraph\">Cette cellule lit un topic avec controle des offsets et du volume.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: garantir un echantillon lisible pour diagnostic et monitoring.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "87c148f29d4ae36160f659fab351699b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "912ae96124f5b1792c9bf90b775ef118",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-5-execution\">Cellule 5 - Execution</h2>\n<span class=\"paragraph\">Cette cellule lit les anomalies capteur pour verification.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: un point de controle rapide pour valider la qualite des alertes.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

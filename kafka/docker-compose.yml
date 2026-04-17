@@ -1,0 +1,166 @@
+services:
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: kafka
+    hostname: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--list", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: agro_kafka_ui
+    ports:
+      - "8085:8080"
+    environment:
+      DYNAMIC_CONFIG_ENABLED: "true"
+      KAFKA_CLUSTERS_0_NAME: agro-kafka
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: kafka-connect
+      KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect:8083
+    depends_on:
+      kafka:
+        condition: service_healthy
+      kafka-connect:
+        condition: service_started
+
+  minio:
+    image: minio/minio
+    container_name: agro_minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  mc:
+    image: minio/mc
+    container_name: agro_minio_client
+    depends_on:
+      minio:
+        condition: service_started
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      mc alias set local http://minio:9000 minioadmin minioadmin123;
+      mc mb -p local/bronze || true;
+      mc mb -p local/realtime || true;
+      exit 0;
+      "
+
+  capteur:
+    build:
+      context: ./capteur
+    container_name: agro_capteur
+    environment:
+      SENSOR_INTERVAL_SECONDS: 1
+      SENSOR_MAX_HISTORY: 10000
+      SENSOR_ANOMALY_RATE: 0.2
+    ports:
+      - "5000:5000"
+
+  field-app:
+    build:
+      context: ./field_app
+    container_name: agro_field_app
+    environment:
+      FIELD_OUTPUT_FILE: /data/field_events.ndjson
+      FIELD_INTERVAL_SECONDS: 30
+    volumes:
+      - ./data:/data
+
+  kafka-connect:
+    build:
+      context: ./connect
+    container_name: agro_kafka_connect
+    ports:
+      - "8083:8083"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: connect-cluster
+      CONNECT_CONFIG_STORAGE_TOPIC: connect-configs
+      CONNECT_OFFSET_STORAGE_TOPIC: connect-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: connect-status
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
+      CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
+      CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components
+      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-7.6.0.jar
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  connect-init:
+    image: curlimages/curl:8.7.1
+    container_name: agro_connect_init
+    depends_on:
+      kafka-connect:
+        condition: service_started
+      mc:
+        condition: service_completed_successfully
+    volumes:
+      - ./connect/connectors:/connectors:ro
+      - ./connect/register-connectors.sh:/scripts/register-connectors.sh:ro
+    entrypoint: ["sh", "/scripts/register-connectors.sh"]
+
+  marimo:
+    image: python:3.10-slim
+    container_name: agro_marimo
+    ports:
+      - "8080:8080"
+    working_dir: /app
+    volumes:
+      - ./notebook:/app/notebook
+      - ./data:/app/data
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SENSOR_API_URL: http://capteur:5000/sensor
+      FIELD_DATA_FILE: /app/data/field_events.ndjson
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin123
+      KAFKA_TOPIC_RAW: sensor.raw
+      KAFKA_TOPIC_ANOMALY: sensor.anomalies
+      KAFKA_TOPIC_FIELD_RAW: field.raw
+      KAFKA_TOPIC_FIELD_ANOMALY: field.anomalies
+      CONSUMER_GROUP: anomaly-detector-v1
+    command: >
+      sh -c "
+      pip install --no-cache-dir marimo kafka-python requests boto3 &&
+      marimo edit notebook --host 0.0.0.0 --port 8080 --no-token
+      "
+    depends_on:
+      kafka:
+        condition: service_healthy
+      capteur:
+        condition: service_started
+      field-app:
+        condition: service_started
+      minio:
+        condition: service_started

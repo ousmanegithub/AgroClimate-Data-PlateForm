@@ -1,0 +1,149 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.1",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "4a95b90b8c265cb8381df9d05c5b5f17",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "5b3ff9e41a7f6982f50d9fae3e59719d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-1-imports-du-detecteur-d-anomalies-capteur\">Cellule 1 - Imports du detecteur d anomalies capteur</h2>\n<span class=\"paragraph\">Cette cellule charge les composants Kafka et les utilitaires de date.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: chaque anomalie doit etre horodatee pour pilotage et tracabilite.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "7a00767cf0adaadab3bc7259bed6a087",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "2eb6a3de320393c31ad4eb680da3c3bb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-2-configuration\">Cellule 2 - Configuration</h2>\n<span class=\"paragraph\">Cette cellule definit topics et consumer group.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: separer topic brut et topic anomalie structure la surveillance operationnelle.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "867302c05fc5c5ccc6791d6d4a2e8182",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "4c0a74cc8d645142602b99ce5c61cc8a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-3-consumer-source-capteur\">Cellule 3 - Consumer source capteur</h2>\n<span class=\"paragraph\">Cette cellule cree le consumer sur le topic brut.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: lire le flux brut permet d identifier rapidement les signaux a risque.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "2a74957a58ad613b78e6d7897135c5bc",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "1be3ba48a509ca2c569a2df55d3f8612",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-4-producer-anomalies\">Cellule 4 - Producer anomalies</h2>\n<span class=\"paragraph\">Cette cellule prepare l emission vers le topic dedie aux anomalies.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: isoler les anomalies accelere les actions terrain et les alertes.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "743e18274216a657e0a6f2c3e069b991",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "2fa34b00010e64be7cbf8e78b117dfb2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-5-regles-metier-d-anomalie\">Cellule 5 - Regles metier d anomalie</h2>\n<span class=\"paragraph\">Cette cellule encode les seuils de risque agronomique.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: traduire les seuils metier en regles automatiques permet un monitoring temps reel.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "cd0c4045946fe1c53e27060ce7dacdf9",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "a975a2d9effcc743a6355bae0a362e4c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-6-process-detection-et-routage\">Cellule 6 - Process detection et routage</h2>\n<span class=\"paragraph\">Cette cellule consomme le brut, detecte, puis republie les anomalies.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: ce routage alimente un canal prioritaire pour supervision et reaction rapide.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "9951f44731912fccee3af940b637a96c",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "c3a25a428572c641c4040da9e400d2ed",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-7-execution-tp\">Cellule 7 - Execution TP</h2>\n<span class=\"paragraph\">Cette cellule lance la detection sur un volume fixe.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: une execution reproductible facilite la validation fonctionnelle en demo.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

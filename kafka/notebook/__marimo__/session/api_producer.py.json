@@ -1,0 +1,193 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.1",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "9ca79d799c31069228f2e81b4a68b0d5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "59c14f4d48c27b7850bf749b4d458f7b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-1-imports-du-producer-api\">Cellule 1 - Imports du producer API</h2>\n<span class=\"paragraph\">Cette cellule charge les bibliotheques reseau, Kafka et horodatage.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: on veut tracer chaque evenement avec un timestamp d'ingestion pour l'audit temps reel.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "3d368c87537328a34adedf9a528008ed",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Configuration chargee:\n- KAFKA_BOOTSTRAP: kafka:9092\n- SENSOR_API_URL: http://capteur:5000/sensor\n- RAW_TOPIC: sensor.raw\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "e3f5200c81bf9da1c968123f28439981",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-2-configuration\">Cellule 2 - Configuration</h2>\n<span class=\"paragraph\">Cette cellule lit les variables d'environnement pour connecter API et Kafka.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: separer configuration et logique facilite le deploiement dev/prod.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "df677eb361dc66de17171548414c52a3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "KafkaProducer initialise sur kafka:9092\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "PKri",
+      "code_hash": "c4624ee59121af0806afddc929728d27",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-3-initialisation-producer\">Cellule 3 - Initialisation producer</h2>\n<span class=\"paragraph\">Cette cellule prepare le producteur Kafka JSON.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: standardiser le format JSON accelere l'integration avec les consumers et Kafka Connect.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "e347a6211a08d92b2703ad7b484ff2a2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Fonction fetch_sensor_data() prete\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "5cb259d57fe8a6d490be03e12ac1eabf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-4-lecture-de-la-source-api\">Cellule 4 - Lecture de la source API</h2>\n<span class=\"paragraph\">Cette cellule encapsule l'appel HTTP a la source capteur.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: centraliser la lecture facilite la gestion des erreurs et l'evolution des endpoints.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "08a3beec90eea30db856674dbe83addf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "bed917c8092b1a912a814fdfad48ec04",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-5-publication-en-lot\">Cellule 5 - Publication en lot</h2>\n<span class=\"paragraph\">Cette cellule pousse un lot de messages dans <code>sensor.raw</code>.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: simuler un flux continu permet de tester la detection d'anomalies en conditions proches du reel.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "83be7eff51134542845ae8d0390a26b8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Production de 30 messages vers 'sensor.raw'...\n  - 10 messages produits\n  - 20 messages produits\n  - 30 messages produits\nTermine: 30 messages envoyes vers 'sensor.raw'\nExemple payload: {'anomaly_types': [], 'azote': 49.4, 'carbone_organique': 1.23, 'evapotranspiration': 3.36, 'humidite_air': 75.61, 'humidite_sol': 66.66, 'indice_stress_hydrique': 0, 'is_anomaly': False, 'ph_sol': 7.9, 'phosphore': 7.6, 'pluviometrie': 10.17, 'potassium': 65.54, 'rayonnement_solaire': 15.24, 'region': 'Thies', 'sequence': 203, 'temperature_air': 25.94, 'temperature_sol': 23.56, 'timestamp': '2026-04-16T23:52:55.980763+00:00', 'vitesse_vent': 5.41, 'ingested_at': '2026-04-16T23:52:56.226246+00:00'}\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "emfo",
+      "code_hash": "3cb328fa166a0d2829f47979ecf879f8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-6-execution\">Cellule 6 - Execution</h2>\n<span class=\"paragraph\">Cette cellule lance effectivement la production.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: fournir un point d'execution unique simplifie les demonstrations et la reproductibilite.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.1",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "4a95b90b8c265cb8381df9d05c5b5f17",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "1babade153b8bc703af9a252abad6353",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-1-imports-detecteur-anomalies-source-2\">Cellule 1 - Imports detecteur anomalies source 2</h2>\n<span class=\"paragraph\">Cette cellule charge les composants Kafka pour la chaine field events.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: surveiller les risques agronomiques operationnels (maladies, sur-irrigation, etc.).</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "cd9bbd6f8815bf710f7eeb7cac868397",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "54069cbeb1b4df9afb3bfbd3a7751163",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-2-configuration\">Cellule 2 - Configuration</h2>\n<span class=\"paragraph\">Cette cellule configure le topic brut et le topic anomalies de la 2e source.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: separer evenements et alertes pour prioriser les actions terrain.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "c0fb128674ffd9ae270d7fcbf721fb86",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "d80480c25818ec9c0f816d1281f54f07",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-3-consumer-fieldraw\">Cellule 3 - Consumer field.raw</h2>\n<span class=\"paragraph\">Cette cellule initialise la consommation des evenements terrain.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: analyser rapidement la situation des parcelles et interventions.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "9757c88c73f5e42f9d7b1404ffc2860a",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "9edb3f72fed92c9d5a6f6bd720c05999",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-4-producer-fieldanomalies\">Cellule 4 - Producer field.anomalies</h2>\n<span class=\"paragraph\">Cette cellule prepare la publication des alertes terrain.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: concentrer les cas critiques pour faciliter la prise de decision.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "79cf02db16a78bae625b0c66f83240c2",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "7e550746404c93f826a96b4750358110",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-5-regles-anomalies-terrain\">Cellule 5 - Regles anomalies terrain</h2>\n<span class=\"paragraph\">Cette cellule formalise les risques metier lies aux pratiques culturales.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: declencher des recommandations precoces pour limiter pertes de rendement.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "d0cbab7baebd613604d656d3fcd8994b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "c99aebc140f60a48176ff3c43360321e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-6-process-detection-source-2\">Cellule 6 - Process detection source 2</h2>\n<span class=\"paragraph\">Cette cellule consomme <code>field.raw</code> et route les alertes vers <code>field.anomalies</code>.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: automatiser la priorisation des parcelles a risque.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "0ad1ca8f24f60c0e706c5ad7bfb48fda",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "2c0087cc228b6c0d9dce438ed4efe2bb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-7-execution\">Cellule 7 - Execution</h2>\n<span class=\"paragraph\">Cette cellule lance l'analyse anomalies de la 2e source.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: verifier rapidement la pertinence des regles terrain en demonstration.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

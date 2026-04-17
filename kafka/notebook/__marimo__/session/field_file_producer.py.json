@@ -1,0 +1,130 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.1",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "04140a0ce4cf871e42bedd3d3f5fa6d7",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "874624c1bf0bd4e86a4318c1b3378104",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-1-imports-source-fichier\">Cellule 1 - Imports source fichier</h2>\n<span class=\"paragraph\">Cette cellule charge les outils fichier + Kafka producer.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: la 2e source provient d'une application qui ecrit en continu dans un fichier NDJSON.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "9a0878a5983cd2e733893b6edffd0004",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "7f8dcd13e5a7ff0a320f599aab5f2d00",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-2-configuration\">Cellule 2 - Configuration</h2>\n<span class=\"paragraph\">Cette cellule pointe vers le fichier evenementiel et le topic cible.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: connecter la source operationnelle terrain au pipeline de streaming.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "df677eb361dc66de17171548414c52a3",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "5a78fc01e20d3078124c31cdbca4f79e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-3-initialisation-producer\">Cellule 3 - Initialisation producer</h2>\n<span class=\"paragraph\">Cette cellule prepare le producer pour <code>field.raw</code>.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: convertir une source fichier en flux Kafka exploitable en temps reel.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "3fcac9d3a7b82a133f1490463ed471af",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "1fbe7c9c43ab263a75aa9c7049d7b4f2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-4-lecture-ndjson\">Cellule 4 - Lecture NDJSON</h2>\n<span class=\"paragraph\">Cette cellule lit et valide les evenements du fichier (avec compatibilite ancienne ecriture).</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: eviter la perte de donnees historiques meme si le format fichier a evolue.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "c9bd5adfc2ddebe2256961bfdbbdc52c",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "6dfeb6fac56b158e2ad2916f1686fcee",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-5-publication-source-2\">Cellule 5 - Publication source 2</h2>\n<span class=\"paragraph\">Cette cellule publie les evenements agronomiques vers Kafka.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: unifier les flux capteur et terrain dans la meme architecture de traitement.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "9091c68b8b154d34e5c24134a03132b8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "80aec2331b3848c3d89cb57672bf4d63",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"cellule-6-execution\">Cellule 6 - Execution</h2>\n<span class=\"paragraph\">Cette cellule declenche la publication de la 2e source.</span>\n<span class=\"paragraph\"><strong>Justification metier</strong>: preuve de fonctionnement du flux complementaire dans la demo.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}
