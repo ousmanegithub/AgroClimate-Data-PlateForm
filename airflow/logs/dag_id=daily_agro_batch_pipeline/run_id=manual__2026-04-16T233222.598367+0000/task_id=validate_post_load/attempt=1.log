@@ -1,0 +1,25 @@
+[2026-04-16T23:32:35.785+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-04-16T23:32:35.798+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: daily_agro_batch_pipeline.validate_post_load manual__2026-04-16T23:32:22.598367+00:00 [queued]>
+[2026-04-16T23:32:35.805+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: daily_agro_batch_pipeline.validate_post_load manual__2026-04-16T23:32:22.598367+00:00 [queued]>
+[2026-04-16T23:32:35.806+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2026-04-16T23:32:35.816+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): validate_post_load> on 2026-04-16 23:32:22.598367+00:00
+[2026-04-16T23:32:35.821+0000] {standard_task_runner.py:72} INFO - Started process 424 to run task
+[2026-04-16T23:32:35.824+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'daily_***_batch_pipeline', 'validate_post_load', 'manual__2026-04-16T23:32:22.598367+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/daily_***_batch_pipeline.py', '--cfg-path', '/tmp/tmpm74j_eji']
+[2026-04-16T23:32:35.828+0000] {standard_task_runner.py:105} INFO - Job 15: Subtask validate_post_load
+[2026-04-16T23:32:35.869+0000] {task_command.py:467} INFO - Running <TaskInstance: daily_agro_batch_pipeline.validate_post_load manual__2026-04-16T23:32:22.598367+00:00 [running]> on host 6c89bbd468c7
+[2026-04-16T23:32:35.942+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-engineering' AIRFLOW_CTX_DAG_ID='daily_***_batch_pipeline' AIRFLOW_CTX_TASK_ID='validate_post_load' AIRFLOW_CTX_EXECUTION_DATE='2026-04-16T23:32:22.598367+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-16T23:32:22.598367+00:00'
+[2026-04-16T23:32:35.943+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-04-16T23:32:35.975+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-04-16T23:32:35.977+0000] {base.py:84} INFO - Retrieving connection '***_postgres'
+[2026-04-16T23:32:35.983+0000] {sql.py:553} INFO - Running statement: SELECT COUNT(*) FROM daily_***_kpi_batch;, parameters: None
+[2026-04-16T23:32:35.984+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:32:35.990+0000] {sql.py:553} INFO - Running statement: SELECT COUNT(*) FROM daily_***_kpi_batch WHERE created_at::date = CURRENT_DATE;, parameters: None
+[2026-04-16T23:32:35.993+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:32:35.995+0000] {logging_mixin.py:190} INFO - [batch-check] target rows after load: 840
+[2026-04-16T23:32:35.996+0000] {logging_mixin.py:190} INFO - [batch-check] inserted today: 840
+[2026-04-16T23:32:35.997+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-04-16T23:32:36.006+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-04-16T23:32:36.010+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=daily_***_batch_pipeline, task_id=validate_post_load, run_id=manual__2026-04-16T23:32:22.598367+00:00, execution_date=20260416T233222, start_date=20260416T233235, end_date=20260416T233236
+[2026-04-16T23:32:36.039+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-04-16T23:32:36.056+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-16T23:32:36.059+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

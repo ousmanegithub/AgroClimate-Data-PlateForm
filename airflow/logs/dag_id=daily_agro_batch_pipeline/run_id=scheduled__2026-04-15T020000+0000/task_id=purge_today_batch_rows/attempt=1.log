@@ -1,0 +1,21 @@
+[2026-04-16T22:43:32.454+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-04-16T22:43:32.471+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: daily_agro_batch_pipeline.purge_today_batch_rows scheduled__2026-04-15T02:00:00+00:00 [queued]>
+[2026-04-16T22:43:32.481+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: daily_agro_batch_pipeline.purge_today_batch_rows scheduled__2026-04-15T02:00:00+00:00 [queued]>
+[2026-04-16T22:43:32.484+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2026-04-16T22:43:32.497+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): purge_today_batch_rows> on 2026-04-15 02:00:00+00:00
+[2026-04-16T22:43:32.502+0000] {standard_task_runner.py:72} INFO - Started process 235 to run task
+[2026-04-16T22:43:32.506+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'daily_***_batch_pipeline', 'purge_today_batch_rows', 'scheduled__2026-04-15T02:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/daily_***_batch_pipeline.py', '--cfg-path', '/tmp/tmpb4h8m6dk']
+[2026-04-16T22:43:32.512+0000] {standard_task_runner.py:105} INFO - Job 3: Subtask purge_today_batch_rows
+[2026-04-16T22:43:32.602+0000] {task_command.py:467} INFO - Running <TaskInstance: daily_agro_batch_pipeline.purge_today_batch_rows scheduled__2026-04-15T02:00:00+00:00 [running]> on host 4c1133ea0498
+[2026-04-16T22:43:32.672+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-engineering' AIRFLOW_CTX_DAG_ID='daily_***_batch_pipeline' AIRFLOW_CTX_TASK_ID='purge_today_batch_rows' AIRFLOW_CTX_EXECUTION_DATE='2026-04-15T02:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-15T02:00:00+00:00'
+[2026-04-16T22:43:32.675+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-04-16T22:43:32.688+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-04-16T22:43:32.691+0000] {base.py:84} INFO - Retrieving connection '***_postgres'
+[2026-04-16T22:43:32.699+0000] {sql.py:553} INFO - Running statement: DELETE FROM daily_***_kpi_batch WHERE date_obs = CURRENT_DATE;, parameters: None
+[2026-04-16T22:43:32.702+0000] {sql.py:562} INFO - Rows affected: 0
+[2026-04-16T22:43:32.704+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-04-16T22:43:32.715+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-04-16T22:43:32.717+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=daily_***_batch_pipeline, task_id=purge_today_batch_rows, run_id=scheduled__2026-04-15T02:00:00+00:00, execution_date=20260415T020000, start_date=20260416T224332, end_date=20260416T224332
+[2026-04-16T22:43:32.763+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-04-16T22:43:32.781+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-16T22:43:32.787+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

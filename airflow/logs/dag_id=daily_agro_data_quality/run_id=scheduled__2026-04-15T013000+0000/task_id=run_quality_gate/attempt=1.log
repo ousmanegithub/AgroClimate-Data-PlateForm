@@ -1,0 +1,164 @@
+[2026-04-16T23:00:45.185+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-04-16T23:00:45.207+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: daily_agro_data_quality.run_quality_gate scheduled__2026-04-15T01:30:00+00:00 [queued]>
+[2026-04-16T23:00:45.214+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: daily_agro_data_quality.run_quality_gate scheduled__2026-04-15T01:30:00+00:00 [queued]>
+[2026-04-16T23:00:45.217+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2026-04-16T23:00:45.228+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): run_quality_gate> on 2026-04-15 01:30:00+00:00
+[2026-04-16T23:00:45.232+0000] {standard_task_runner.py:72} INFO - Started process 216 to run task
+[2026-04-16T23:00:45.235+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'daily_***_data_quality', 'run_quality_gate', 'scheduled__2026-04-15T01:30:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/daily_***_data_quality.py', '--cfg-path', '/tmp/tmp_pzz8f6k']
+[2026-04-16T23:00:45.239+0000] {standard_task_runner.py:105} INFO - Job 7: Subtask run_quality_gate
+[2026-04-16T23:00:45.293+0000] {task_command.py:467} INFO - Running <TaskInstance: daily_agro_data_quality.run_quality_gate scheduled__2026-04-15T01:30:00+00:00 [running]> on host 89a81806d652
+[2026-04-16T23:00:45.364+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-engineering' AIRFLOW_CTX_DAG_ID='daily_***_data_quality' AIRFLOW_CTX_TASK_ID='run_quality_gate' AIRFLOW_CTX_EXECUTION_DATE='2026-04-15T01:30:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-15T01:30:00+00:00'
+[2026-04-16T23:00:45.370+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-04-16T23:00:45.394+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-04-16T23:00:45.404+0000] {base.py:84} INFO - Retrieving connection '***_postgres'
+[2026-04-16T23:00:45.420+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM daily_farm_performance
+                WHERE parcelle_id IS NULL
+                   OR region IS NULL
+                   OR culture IS NULL
+                   OR date_obs IS NULL;
+            , parameters: None
+[2026-04-16T23:00:45.431+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.449+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'farm_null_critical_fields', 'error', 'PASS', 0, 'Champs critiques vides dans daily_farm_performance')
+[2026-04-16T23:00:45.457+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.474+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM daily_market_prices
+                WHERE region IS NULL
+                   OR culture IS NULL
+                   OR date_prix IS NULL;
+            , parameters: None
+[2026-04-16T23:00:45.482+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.498+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'market_null_critical_fields', 'error', 'PASS', 0, 'Champs critiques vides dans daily_market_prices')
+[2026-04-16T23:00:45.504+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.518+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM (
+                    SELECT parcelle_id, date_obs, COUNT(*) AS c
+                    FROM daily_farm_performance
+                    GROUP BY parcelle_id, date_obs
+                    HAVING COUNT(*) > 1
+                ) t;
+            , parameters: None
+[2026-04-16T23:00:45.521+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.533+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'farm_duplicate_business_key', 'error', 'PASS', 0, 'Doublons sur la cle metier parcelle_id + date_obs')
+[2026-04-16T23:00:45.542+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.562+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM (
+                    SELECT region, culture, date_prix, COUNT(*) AS c
+                    FROM daily_market_prices
+                    GROUP BY region, culture, date_prix
+                    HAVING COUNT(*) > 1
+                ) t;
+            , parameters: None
+[2026-04-16T23:00:45.568+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.587+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'market_duplicate_business_key', 'error', 'PASS', 0, 'Doublons sur la cle metier region + culture + date_prix')
+[2026-04-16T23:00:45.592+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.613+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM daily_farm_performance
+                WHERE surface_ha < 0
+                   OR rendement_estime_kg_ha < 0
+                   OR production_estimee_tonnes < 0
+                   OR biomasse_estimee < 0
+                   OR besoin_eau_estime_mm < 0
+                   OR cout_journalier_fcfa < 0
+                   OR revenu_estime_fcfa < 0;
+            , parameters: None
+[2026-04-16T23:00:45.627+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.641+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'farm_negative_values', 'error', 'PASS', 0, 'Valeurs negatives interdites cote farm')
+[2026-04-16T23:00:45.648+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.665+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM daily_market_prices
+                WHERE prix_kg_fcfa < 0
+                   OR prix_tonne_fcfa < 0
+                   OR demande_locale < 0
+                   OR offre_disponible_tonnes < 0
+                   OR cout_transport_fcfa < 0
+                   OR revenu_potentiel_fcfa < 0;
+            , parameters: None
+[2026-04-16T23:00:45.675+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.686+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'market_negative_values', 'error', 'PASS', 0, 'Valeurs negatives interdites cote marche')
+[2026-04-16T23:00:45.691+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.705+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM daily_farm_performance
+                WHERE stress_hydrique_score NOT BETWEEN 0 AND 5
+                   OR fertilite_sol_score NOT BETWEEN 0 AND 10
+                   OR risque_maladie_score NOT BETWEEN 0 AND 5
+                   OR score_sante_culture NOT BETWEEN 0 AND 10;
+            , parameters: None
+[2026-04-16T23:00:45.714+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.725+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'farm_scores_out_of_range', 'warning', 'PASS', 0, 'Scores hors bornes metier attendues')
+[2026-04-16T23:00:45.732+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.746+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM daily_market_prices
+                WHERE indice_penurie NOT BETWEEN 0 AND 5
+                   OR indice_volatilite_prix NOT BETWEEN 0 AND 5;
+            , parameters: None
+[2026-04-16T23:00:45.750+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.763+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'market_indices_out_of_range', 'warning', 'PASS', 0, 'Indices marche hors bornes')
+[2026-04-16T23:00:45.769+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.783+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM daily_market_prices
+                WHERE prix_kg_fcfa IS NOT NULL
+                  AND prix_tonne_fcfa IS NOT NULL
+                  AND ABS(prix_tonne_fcfa - (prix_kg_fcfa * 1000)) > 5000;
+            , parameters: None
+[2026-04-16T23:00:45.789+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.796+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'price_kg_tonne_inconsistency', 'warning', 'FAIL', 827, 'Incoherence entre prix_kg et prix_tonne')
+[2026-04-16T23:00:45.801+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.820+0000] {sql.py:553} INFO - Running statement: 
+                SELECT COUNT(*)
+                FROM daily_farm_performance f
+                LEFT JOIN daily_market_prices m
+                  ON f.region = m.region
+                 AND f.culture = m.culture
+                 AND f.date_obs = m.date_prix
+                WHERE f.date_obs = CURRENT_DATE - INTERVAL '1 day'
+                  AND m.id IS NULL;
+            , parameters: None
+[2026-04-16T23:00:45.827+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.841+0000] {sql.py:553} INFO - Running statement: 
+            INSERT INTO daily_data_quality_results (run_id, check_name, severity, status, failed_rows, details)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            , parameters: ('20260416T230045Z', 'farm_market_join_coverage_yesterday', 'warning', 'PASS', 0, 'Lignes farm non jointes au marche (J-1)')
+[2026-04-16T23:00:45.846+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:00:45.856+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-04-16T23:00:45.876+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-04-16T23:00:45.884+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=daily_***_data_quality, task_id=run_quality_gate, run_id=scheduled__2026-04-15T01:30:00+00:00, execution_date=20260415T013000, start_date=20260416T230045, end_date=20260416T230045
+[2026-04-16T23:00:45.934+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-04-16T23:00:45.961+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-16T23:00:45.965+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

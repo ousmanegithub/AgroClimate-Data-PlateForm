@@ -1,0 +1,28 @@
+[2026-04-16T23:32:26.062+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-04-16T23:32:26.094+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: daily_agro_batch_pipeline.profile_incremental_window manual__2026-04-16T23:32:22.598367+00:00 [queued]>
+[2026-04-16T23:32:26.103+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: daily_agro_batch_pipeline.profile_incremental_window manual__2026-04-16T23:32:22.598367+00:00 [queued]>
+[2026-04-16T23:32:26.107+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2026-04-16T23:32:26.122+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): profile_incremental_window> on 2026-04-16 23:32:22.598367+00:00
+[2026-04-16T23:32:26.128+0000] {standard_task_runner.py:72} INFO - Started process 238 to run task
+[2026-04-16T23:32:26.130+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'daily_***_batch_pipeline', 'profile_incremental_window', 'manual__2026-04-16T23:32:22.598367+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/daily_***_batch_pipeline.py', '--cfg-path', '/tmp/tmpq4y5pkpt']
+[2026-04-16T23:32:26.134+0000] {standard_task_runner.py:105} INFO - Job 12: Subtask profile_incremental_window
+[2026-04-16T23:32:26.177+0000] {task_command.py:467} INFO - Running <TaskInstance: daily_agro_batch_pipeline.profile_incremental_window manual__2026-04-16T23:32:22.598367+00:00 [running]> on host 6c89bbd468c7
+[2026-04-16T23:32:26.229+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-engineering' AIRFLOW_CTX_DAG_ID='daily_***_batch_pipeline' AIRFLOW_CTX_TASK_ID='profile_incremental_window' AIRFLOW_CTX_EXECUTION_DATE='2026-04-16T23:32:22.598367+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-16T23:32:22.598367+00:00'
+[2026-04-16T23:32:26.232+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-04-16T23:32:26.241+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-04-16T23:32:26.243+0000] {base.py:84} INFO - Retrieving connection '***_postgres'
+[2026-04-16T23:32:26.249+0000] {sql.py:553} INFO - Running statement: SELECT MAX(date_obs) FROM daily_***_kpi_batch;, parameters: None
+[2026-04-16T23:32:26.253+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:32:26.258+0000] {sql.py:553} INFO - Running statement: SELECT COUNT(*) FROM daily_farm_performance WHERE date_obs > %s;, parameters: (datetime.date(2026, 4, 16),)
+[2026-04-16T23:32:26.262+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:32:26.267+0000] {sql.py:553} INFO - Running statement: SELECT COUNT(*) FROM daily_market_prices WHERE date_prix > %s;, parameters: (datetime.date(2026, 4, 16),)
+[2026-04-16T23:32:26.270+0000] {sql.py:562} INFO - Rows affected: 1
+[2026-04-16T23:32:26.295+0000] {logging_mixin.py:190} INFO - [batch-profile] watermark=2026-04-16
+[2026-04-16T23:32:26.301+0000] {logging_mixin.py:190} INFO - [batch-profile] farm_candidates=0
+[2026-04-16T23:32:26.303+0000] {logging_mixin.py:190} INFO - [batch-profile] market_candidates=0
+[2026-04-16T23:32:26.305+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-04-16T23:32:26.313+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-04-16T23:32:26.317+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=daily_***_batch_pipeline, task_id=profile_incremental_window, run_id=manual__2026-04-16T23:32:22.598367+00:00, execution_date=20260416T233222, start_date=20260416T233226, end_date=20260416T233226
+[2026-04-16T23:32:26.346+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-04-16T23:32:26.370+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-16T23:32:26.378+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
